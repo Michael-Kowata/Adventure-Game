@@ -1,2 +1,2 @@
 # Adventure-Game
-Personal Java Project (WIP)
+Personal Project (WIP)
