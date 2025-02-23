@@ -1,4 +1,5 @@
 from player import Player
+from monster import Monster
 import sys
 
 def main():
@@ -54,6 +55,7 @@ def intersection(protag):
     
         if Choice == '1':
             print ("You continue through north path.\n")
+            north(protag)
             break
         elif Choice == '2':
             print ("You decided to check out the east path.\n")
@@ -72,7 +74,32 @@ def intersection(protag):
             print ("West path -> Lake of Lost Souls\n")
         else:
             print ("Invalid option.\n")
-            
+
+def north(protag):
+    print ("Walking across Moonshine Valley. You see a shiny glowing rock. What do you do?")
+    
+    while (True):
+        print ("-------------------------------------------------------")
+        print ("Options:")
+        print ("1: Pick it up")
+        print ("2: Kick it")
+        print ("3: Leave")
+        print ("-------------------------------------------------------")
+        Choice = input("\nOption: ")
+    
+        if Choice == '1':
+            print ("You picked up the rock. The mystical rock has been added to your inventory.\n")
+            break
+        elif Choice == '2':
+            print ("You kicked the rock. A wild spirit appears from the rock!")
+            monster = Monster("spirit")
+            #Encounter function 
+            break
+        elif Choice == '3':
+            print ("You decided to leave.\n")
+            break
+        else:
+            print ("Invalid option.\n")
 
 if __name__ == "__main__":
     main()
