@@ -11,6 +11,49 @@ def main():
     gate(protag)
     intersection(protag)
 
+def encounter(protag, monster):
+        monster_name = monster.get_name()
+        print (f"A wild {monster_name} appeared!")
+        print ("What will you do?")
+
+        while (True):
+            print ("-------------------------------------------------------")
+            print (f"Your Health: {protag.get_health()}")
+            print (f"{monster_name}'s Health: {monster.get_health()}")
+            print ("-------------------------------------------------------")
+
+            print ("Options:")
+            print ("1: Attack")
+            print ("2: Defend")
+            print ("3: Flee")
+            print ("Press any key to leave") 
+            print ("-------------------------------------------------------")
+            Choice = input("\nOption: ")
+            
+            if Choice == '1':
+                print ("You dealt 2 damage!\n")
+                monster.take_damage(protag.get_attack())
+                
+                if monster.death_check():
+                    print ("You defeated the monster!\n")
+                    break
+
+                print ("The monster attacks you!\n")
+                protag.take_damage(monster.get_attack())
+                if protag.death_check():
+                    sys.exit()
+
+            elif Choice == '2':
+                print ("You defended the attack!\n")
+                if protag.death_check():
+                    sys.exit()
+            elif Choice == '3':
+                print ("You ran away!\n")
+                break
+            else:
+                print ("Invalid option.\n")
+
+
 def gate(protag):
     print ("\nIn front of you stands a gate to dangerous dungeon.")
     print (f"Dungeon Guard: Hello {protag.get_name()}, as punishment for your crimes you were sentenced to scout and map out the area. If you can redeem yourself the council will consider your crimes forgiven.\n")
@@ -84,17 +127,22 @@ def north(protag):
         print ("Options:")
         print ("1: Pick it up")
         print ("2: Kick it")
+        print ("3: Leave it alone")
         print ("-------------------------------------------------------")
         Choice = input("\nOption: ")
     
         if Choice == '1':
             print ("You picked up the rock. A wild spirit attacks!.\n")
-            monster = Monster("spirit")
-            break
+            monster = Monster("Spirit")
+            encounter(protag, monster)
+            
         elif Choice == '2':
             print ("You kicked the rock. A wild spirit appears from the rock! ")
-            monster = Monster("spirit")
-            #Encounter function 
+            monster = Monster("Spirit")
+            encounter(protag, monster)
+        elif Choice == '3':
+            print ("You left the rock alone and continued on your way. There was nothing else of interest and you find yourself going back to the intersecton.\n")
+            intersection(protag)
             break
         else:
             print ("Invalid option.\n")
